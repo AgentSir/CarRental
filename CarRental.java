@@ -11,7 +11,7 @@ public class CarRental {
     String mostSevenDays = "";
     String leastSevenDays = "";
 
-    public void inputData() throws InputMismatchException{
+    public void inputData() {
 
         Scanner scanner = new Scanner(System.in);
 
