@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class CarRental {
 
-    final int N = 2;
+    final int N = 5;
     String [] customerName = new String [N];
     int [] daysNum = new int [N];
     boolean [] specialOffer = new boolean[N];
