@@ -1,8 +1,9 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CarRental {
 
-    final int N = 5;
+    final int N = 2;
     String [] customerName = new String [N];
     int [] daysNum = new int [N];
     boolean [] specialOffer = new boolean[N];
@@ -10,7 +11,7 @@ public class CarRental {
     String mostSevenDays = "";
     String leastSevenDays = "";
 
-    public void inputData(){
+    public void inputData() throws InputMismatchException{
 
         Scanner scanner = new Scanner(System.in);
 
@@ -26,11 +27,9 @@ public class CarRental {
                     if(scanner.hasNextInt()){
                         daysNum[i] = scanner.nextInt();
                         if (daysNum [i] <= 0 || daysNum[i] > 365){
-                            throw new NumberFormatException(" Error: you can't rent a car for " + daysNum[i] + " number of days.");
-                        }
-                        break;
-                    } else throw new NumberFormatException("Error: entered data is not a number ");
-
+                            throw new NumberFormatException(" Error: you can't rent a car for " + daysNum[i] + " day/days.");
+                        } else break;
+                    } else throw new NumberFormatException("Error: entered data is not a number.");
                 } catch (NumberFormatException e){
                     System.out.print(e + " Please, enter the data again ");
                 }
@@ -89,10 +88,10 @@ public class CarRental {
 
         System.out.printf("%n%n             Summary of Car Rentals%n");
         System.out.println("===============================================================");
-        System.out.println("Name           Days           SpecialOffer      Charge");
+        System.out.println("    Name           Days           SpecialOffer      Charge");
         System.out.printf("---------------------------------------------------------------%n%n");
         for(int i = 0; i < N; i++){
-           System.out.printf(customerName[i] + "          " + daysNum[i] + "          " + specialOfferYesOrNo(specialOffer[i]) + "         $%.2f%n", charge[i]);
+           System.out.printf("%-19s%-15d%-17s $%.2f%n", customerName[i], daysNum[i], specialOfferYesOrNo(specialOffer[i]), charge[i]);
 
            if (maxCharge < charge[i]) {
                maxCharge = charge[i];
@@ -104,10 +103,10 @@ public class CarRental {
            }
         }
         System.out.printf("%n---------------------------------------------------------------%n");
-        System.out.printf("The customer spending most rental is " + customerName[max] + " $%.2f%n", charge[max]);
-        System.out.printf("The customer spending least rental is " + customerName[min] + " $%.2f%n", charge[min]);
+        System.out.printf("The customer spending most rental is " + customerName[max] + " $%.2f%n%n", charge[max]);
+        System.out.printf("The customer spending least rental is " + customerName[min] + " $%.2f%n%n", charge[min]);
         System.out.println("The rental days < 7: " + leastSevenDays);
-        System.out.println("The rental days >= 7: " + mostSevenDays);
+        System.out.println("The rental days >=7: " + mostSevenDays);
     }
 
     public String specialOfferYesOrNo (boolean specialOffer){
